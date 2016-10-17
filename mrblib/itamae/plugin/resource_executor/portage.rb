@@ -35,11 +35,31 @@ module Itamae
         end
 
         def install_children
-          [] # TBD
+          recipes = []
+          recipes << recipe_package(:install)
+          recipes
         end
 
         def remove_children
           [] # TBD
+        end
+
+        def recipe_package(_action)
+          _name, _version, _slot, _atom = self.attributes.name, self.attributes.version, self.attributes.slot, self.attributes.atom
+          _emerge_cmd, _eix_cmd = self.attributes.emerge_cmd, self.attributes.eix_cmd
+          _noreplace, _oneshot = self.attributes.noreplace, self.attributes.oneshot
+          Resource::PortagePackage.new(_name, recipe) do
+            action _action
+            version _version if _version
+            slot _slot
+            atom _atom
+
+            emerge_cmd _emerge_cmd
+            eix_cmd _eix_cmd
+
+            noreplace _noreplace
+            oneshot _oneshot
+          end
         end
       end
     end
