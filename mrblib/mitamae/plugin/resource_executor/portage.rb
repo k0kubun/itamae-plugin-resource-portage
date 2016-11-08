@@ -1,7 +1,7 @@
-module Itamae
+module MItamae
   module Plugin
     module ResourceExecutor
-      class Portage < Itamae::ResourceExecutor::Base
+      class Portage < MItamae::ResourceExecutor::Base
         def initialize(resource, options)
           super
           @recipe_executor = RecipeExecutor.new(options)

@@ -1,7 +1,7 @@
-module Itamae
+module MItamae
   module Plugin
     module ResourceExecutor
-      class PortagePackage < Itamae::ResourceExecutor::Base
+      class PortagePackage < MItamae::ResourceExecutor::Base
         def apply(current, desired)
           # TBD
         end
