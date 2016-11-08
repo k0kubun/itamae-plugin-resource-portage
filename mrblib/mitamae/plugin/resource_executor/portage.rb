@@ -4,18 +4,14 @@ module MItamae
       class Portage < MItamae::ResourceExecutor::Base
         def initialize(resource, options)
           super
-          @recipe_executor = RecipeExecutor.new(options)
         end
 
         def apply(current, desired)
+          executor = RecipeExecutor.new(@options)
           if desired.exist
-            install_children.each do |recipe|
-              @recipe_executor.execute(recipe)
-            end
+            executor.execute(install_children)
           else
-            remove_children.each do |node|
-              @recipe_executor.execute(recipe)
-            end
+            executor.execute(remove_children)
           end
         end
 
